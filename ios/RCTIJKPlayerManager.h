@@ -4,6 +4,6 @@
 
 @interface RCTIJKPlayerManager : RCTViewManager
 
-@property (nonatomic, strong) RCTIJKPlayer *camera;
+@property (nonatomic, strong) RCTIJKPlayer *rctijkplayer;
 
 @end

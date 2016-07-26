@@ -24,8 +24,8 @@ RCT_EXPORT_MODULE();
 
 - (UIView *)view
 {
-  self.camera = [[RCTIJKPlayer alloc] initWithManager:self bridge:self.bridge];
-  return self.camera;
+  self.rctijkplayer = [[RCTIJKPlayer alloc] initWithManager:self bridge:self.bridge];
+  return self.rctijkplayer;
 }
 
 - (NSDictionary *)constantsToExport
@@ -55,24 +55,21 @@ RCT_EXPORT_METHOD(start:(NSDictionary *)options
   dispatch_async(dispatch_get_main_queue(), ^{
       NSString *pushURL = (NSString *)(options[@"push_url"]);
       NSLog(@"pushURL: %@", pushURL);
-      [self.camera startWithURL:pushURL];
+      [self.rctijkplayer startWithURL:pushURL];
     });
 }
 
 RCT_EXPORT_METHOD(stop) {
   dispatch_async(dispatch_get_main_queue(), ^{
-      [self.camera stop];
     });
 }
 
 
 RCT_EXPORT_METHOD(mute) {
-  [self.camera mute];
 }
 
 RCT_EXPORT_METHOD(resume) {
   dispatch_async(dispatch_get_main_queue(), ^{
-      [self.camera resume];
     });
 }
 
