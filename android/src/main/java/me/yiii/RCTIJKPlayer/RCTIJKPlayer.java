@@ -31,16 +31,16 @@ public class RCTIJKPlayer {
 
 
     public void stop() {
-        mIJKPlayerView.stop();
+        // mIJKPlayerView.stop();
         Log.e("RCTIJKPlayer", String.format("stop"));
     }
 
     public void mute() {
-        mIJKPlayerView.mute();
+        // mIJKPlayerView.mute();
     }
 
     public void resume() {
-        mIJKPlayerView.resume();
+        // mIJKPlayerView.resume();
     }
 
 }

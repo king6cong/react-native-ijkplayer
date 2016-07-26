@@ -30,13 +30,6 @@ repositories {
   mavenCentral()
 }
 
-// task copyNativeLibs(type: Copy) {
-//     from(new File(getProjectDir(), 'src/main/jniLibs')) { include '**/*.so' }
-//     into new File(buildDir, 'native-libs')
-// }
-
 dependencies {
   compile "com.facebook.react:react-native:0.19.+"
-  compile files('libs/aivsp.jar')
-  compile files('libs/mc.jar')
 }

@@ -46,25 +46,25 @@ public class RCTIJKPlayerModule extends ReactContextBaseJavaModule {
     public void start(final ReadableMap options, final Promise promise) {
         String pushURL = options.getString("push_url");
         Log.e(TAG, "start pushURL: " + pushURL);
-        RCTIJKPlayer.getInstance().start(pushURL);
+        // RCTIJKPlayer.getInstance().start(pushURL);
     }
 
     @ReactMethod
     public void stop() {
         Log.e(TAG, "stop");
-        RCTIJKPlayer.getInstance().stop();
+        // RCTIJKPlayer.getInstance().stop();
     }
 
     @ReactMethod
     public void mute() {
         Log.e(TAG, "mute");
-        RCTIJKPlayer.getInstance().mute();
+        // RCTIJKPlayer.getInstance().mute();
     }
 
     @ReactMethod
     public void resume() {
         Log.e(TAG, "resume");
-        RCTIJKPlayer.getInstance().resume();
+        // RCTIJKPlayer.getInstance().resume();
     }
 
 }

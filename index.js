@@ -74,7 +74,7 @@ export default class RCTIJKPlayer extends Component {
 
     start(options) {
         const props = convertNativeProps(this.props);
-        console.log("ttlive index start begin");
+        console.log("ijkplayer index start begin");
         this.setState({ isRecording: true });
         // return IJKPlayerManager.start(options);
     }

@@ -1,5 +1,5 @@
 rootProject.name = 'Example'
 
 include ':app'
-include ':react-native-ttlive'
-project(':react-native-ttlive').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-ttlive/android')
+include ':react-native-ijkplayer'
+project(':react-native-ijkplayer').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-ijkplayer/android')
