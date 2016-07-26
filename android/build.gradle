@@ -1,0 +1,42 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'com.android.tools.build:gradle:1.2.3'
+  }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion 23
+  buildToolsVersion "23.0.1"
+
+  defaultConfig {
+    minSdkVersion 16
+    targetSdkVersion 22
+    versionCode 1
+    versionName "1.0"
+  }
+  lintOptions {
+    abortOnError false
+    warning 'InvalidPackage'
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+// task copyNativeLibs(type: Copy) {
+//     from(new File(getProjectDir(), 'src/main/jniLibs')) { include '**/*.so' }
+//     into new File(buildDir, 'native-libs')
+// }
+
+dependencies {
+  compile "com.facebook.react:react-native:0.19.+"
+  compile files('libs/aivsp.jar')
+  compile files('libs/mc.jar')
+}
