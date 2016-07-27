@@ -1,5 +1,5 @@
 /**
- * Created by Fabrice Armisen (farmisen@gmail.com) on 1/4/16.
+ * Created by wangcong (king6cong@gmail.com) on 7/13/16.
  */
 
 package me.yiii.RCTIJKPlayer;
