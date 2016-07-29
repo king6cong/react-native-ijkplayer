@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4107014D1ACB732B00C6AA39 /* RCTIJKPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 410701481ACB732B00C6AA39 /* RCTIJKPlayer.m */; };
 		4107014E1ACB732B00C6AA39 /* RCTIJKPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4107014A1ACB732B00C6AA39 /* RCTIJKPlayerManager.m */; };
+		F4CE41431D4B34B300F505CA /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41421D4B34B300F505CA /* IJKMediaFramework.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,7 @@
 		410701481ACB732B00C6AA39 /* RCTIJKPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTIJKPlayer.m; sourceTree = "<group>"; };
 		410701491ACB732B00C6AA39 /* RCTIJKPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTIJKPlayerManager.h; sourceTree = "<group>"; };
 		4107014A1ACB732B00C6AA39 /* RCTIJKPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTIJKPlayerManager.m; sourceTree = "<group>"; };
+		F4CE41421D4B34B300F505CA /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4CE41431D4B34B300F505CA /* IJKMediaFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +48,7 @@
 		410701241ACB719800C6AA39 = {
 			isa = PBXGroup;
 			children = (
+				F4CE41421D4B34B300F505CA /* IJKMediaFramework.framework */,
 				410701471ACB732B00C6AA39 /* RCTIJKPlayer.h */,
 				410701481ACB732B00C6AA39 /* RCTIJKPlayer.m */,
 				410701491ACB732B00C6AA39 /* RCTIJKPlayerManager.h */,
@@ -155,6 +159,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -205,6 +213,10 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

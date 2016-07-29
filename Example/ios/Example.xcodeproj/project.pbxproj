@@ -21,8 +21,23 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		654E122D96634418B7DF4121 /* libRCTIJKPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B96F2F4E8A49FA8E931790 /* libRCTIJKPlayer.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		F4CE41191D4B0A0700F505CA /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41181D4B0A0700F505CA /* IJKMediaFramework.framework */; };
+		F4CE41301D4B0A7200F505CA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41251D4B0A7200F505CA /* AudioToolbox.framework */; };
+		F4CE41311D4B0A7200F505CA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41261D4B0A7200F505CA /* AVFoundation.framework */; };
+		F4CE41321D4B0A7200F505CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41271D4B0A7200F505CA /* CoreGraphics.framework */; };
+		F4CE41331D4B0A7200F505CA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41281D4B0A7200F505CA /* CoreMedia.framework */; };
+		F4CE41341D4B0A7200F505CA /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41291D4B0A7200F505CA /* CoreVideo.framework */; };
+		F4CE41351D4B0A7200F505CA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE412A1D4B0A7200F505CA /* MediaPlayer.framework */; };
+		F4CE41361D4B0A7200F505CA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE412B1D4B0A7200F505CA /* MobileCoreServices.framework */; };
+		F4CE41371D4B0A7200F505CA /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE412C1D4B0A7200F505CA /* OpenGLES.framework */; };
+		F4CE41381D4B0A7200F505CA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE412D1D4B0A7200F505CA /* QuartzCore.framework */; };
+		F4CE41391D4B0A7200F505CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE412E1D4B0A7200F505CA /* UIKit.framework */; };
+		F4CE413A1D4B0A7200F505CA /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE412F1D4B0A7200F505CA /* VideoToolbox.framework */; };
+		F4CE413C1D4B0A7F00F505CA /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE413B1D4B0A7F00F505CA /* libbz2.tbd */; };
+		F4CE413E1D4B0A8600F505CA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE413D1D4B0A8600F505CA /* libz.tbd */; };
+		F4CE413F1D4B0B9F00F505CA /* libRCTIJKPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F41B74B11D478BF900CA03FF /* libRCTIJKPlayer.a */; };
+		F4CE41411D4B327000F505CA /* liblzma.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41401D4B327000F505CA /* liblzma.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,8 +149,22 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		F2B96F2F4E8A49FA8E931790 /* libRCTIJKPlayer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTIJKPlayer.a; sourceTree = "<group>"; };
 		F41B74AC1D478BF900CA03FF /* RCTIJKPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTIJKPlayer.xcodeproj; path = ../../ios/RCTIJKPlayer.xcodeproj; sourceTree = "<group>"; };
+		F4CE41181D4B0A0700F505CA /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
+		F4CE41251D4B0A7200F505CA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F4CE41261D4B0A7200F505CA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		F4CE41271D4B0A7200F505CA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F4CE41281D4B0A7200F505CA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		F4CE41291D4B0A7200F505CA /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		F4CE412A1D4B0A7200F505CA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		F4CE412B1D4B0A7200F505CA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F4CE412C1D4B0A7200F505CA /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		F4CE412D1D4B0A7200F505CA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F4CE412E1D4B0A7200F505CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F4CE412F1D4B0A7200F505CA /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		F4CE413B1D4B0A7F00F505CA /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		F4CE413D1D4B0A8600F505CA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		F4CE41401D4B327000F505CA /* liblzma.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = liblzma.tbd; path = usr/lib/liblzma.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,9 +179,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4CE41411D4B327000F505CA /* liblzma.tbd in Frameworks */,
+				F4CE413F1D4B0B9F00F505CA /* libRCTIJKPlayer.a in Frameworks */,
+				F4CE413E1D4B0A8600F505CA /* libz.tbd in Frameworks */,
+				F4CE413C1D4B0A7F00F505CA /* libbz2.tbd in Frameworks */,
+				F4CE41301D4B0A7200F505CA /* AudioToolbox.framework in Frameworks */,
+				F4CE41311D4B0A7200F505CA /* AVFoundation.framework in Frameworks */,
+				F4CE41321D4B0A7200F505CA /* CoreGraphics.framework in Frameworks */,
+				F4CE41331D4B0A7200F505CA /* CoreMedia.framework in Frameworks */,
+				F4CE41341D4B0A7200F505CA /* CoreVideo.framework in Frameworks */,
+				F4CE41351D4B0A7200F505CA /* MediaPlayer.framework in Frameworks */,
+				F4CE41361D4B0A7200F505CA /* MobileCoreServices.framework in Frameworks */,
+				F4CE41371D4B0A7200F505CA /* OpenGLES.framework in Frameworks */,
+				F4CE41381D4B0A7200F505CA /* QuartzCore.framework in Frameworks */,
+				F4CE41391D4B0A7200F505CA /* UIKit.framework in Frameworks */,
+				F4CE413A1D4B0A7200F505CA /* VideoToolbox.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
+				F4CE41191D4B0A0700F505CA /* IJKMediaFramework.framework in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
@@ -160,7 +205,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				654E122D96634418B7DF4121 /* libRCTIJKPlayer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +343,21 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F4CE41401D4B327000F505CA /* liblzma.tbd */,
+				F4CE413D1D4B0A8600F505CA /* libz.tbd */,
+				F4CE413B1D4B0A7F00F505CA /* libbz2.tbd */,
+				F4CE41251D4B0A7200F505CA /* AudioToolbox.framework */,
+				F4CE41261D4B0A7200F505CA /* AVFoundation.framework */,
+				F4CE41271D4B0A7200F505CA /* CoreGraphics.framework */,
+				F4CE41281D4B0A7200F505CA /* CoreMedia.framework */,
+				F4CE41291D4B0A7200F505CA /* CoreVideo.framework */,
+				F4CE412A1D4B0A7200F505CA /* MediaPlayer.framework */,
+				F4CE412B1D4B0A7200F505CA /* MobileCoreServices.framework */,
+				F4CE412C1D4B0A7200F505CA /* OpenGLES.framework */,
+				F4CE412D1D4B0A7200F505CA /* QuartzCore.framework */,
+				F4CE412E1D4B0A7200F505CA /* UIKit.framework */,
+				F4CE412F1D4B0A7200F505CA /* VideoToolbox.framework */,
+				F4CE41181D4B0A0700F505CA /* IJKMediaFramework.framework */,
 				13B07FAE1A68108700A75B9A /* Example */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ExampleTests */,
@@ -648,6 +707,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -672,6 +735,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
