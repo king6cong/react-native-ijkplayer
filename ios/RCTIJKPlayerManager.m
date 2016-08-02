@@ -37,7 +37,7 @@ RCT_EXPORT_MODULE();
 - (NSArray *)customDirectEventTypes
 {
     return @[
-      @"LiveStateChange",
+      @"PlayBackState",
     ];
 }
 
@@ -53,24 +53,46 @@ RCT_EXPORT_METHOD(start:(NSDictionary *)options
                   reject:(RCTPromiseRejectBlock)reject) {
 
   dispatch_async(dispatch_get_main_queue(), ^{
-      NSString *pushURL = (NSString *)(options[@"push_url"]);
-      NSLog(@"pushURL: %@", pushURL);
-      [self.rctijkplayer startWithURL:pushURL];
+      [self.rctijkplayer startWithOptions:options];
     });
 }
 
 RCT_EXPORT_METHOD(stop) {
-  dispatch_async(dispatch_get_main_queue(), ^{
-    });
-}
-
-
-RCT_EXPORT_METHOD(mute) {
+  [self.rctijkplayer stop];
 }
 
 RCT_EXPORT_METHOD(resume) {
+  [self.rctijkplayer resume];
+}
+
+RCT_EXPORT_METHOD(pause) {
+  [self.rctijkplayer pause];
+}
+
+RCT_EXPORT_METHOD(shutdown) {
   dispatch_async(dispatch_get_main_queue(), ^{
+      [self.rctijkplayer shutdown];
     });
+}
+
+RCT_EXPORT_METHOD(seekTo:(double)currentPlaybackTime) {
+  [self.rctijkplayer seekTo:currentPlaybackTime];
+}
+
+RCT_EXPORT_METHOD(playbackInfo:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject) {
+
+  NSDictionary *info = @{
+    @"currentPlaybackTime": [NSNumber numberWithDouble:self.rctijkplayer.player.currentPlaybackTime],
+    @"duration": [NSNumber numberWithDouble:self.rctijkplayer.player.duration],
+    @"playableDuration": [NSNumber numberWithDouble:self.rctijkplayer.player.playableDuration],
+    @"bufferingProgress": [NSNumber numberWithLong:self.rctijkplayer.player.bufferingProgress],
+    @"playbackState": [NSNumber numberWithInt:self.rctijkplayer.player.playbackState],
+    @"loadState": [NSNumber numberWithInt:self.rctijkplayer.player.loadState],
+    @"isPreparedToPlay": [NSNumber numberWithBool:self.rctijkplayer.player.isPreparedToPlay],
+  };
+
+  resolve(info);
 }
 
 @end

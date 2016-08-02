@@ -7,7 +7,7 @@
 
 #import "UIView+React.h"
 #import <IJKMediaFramework/IJKFFMoviePlayerController.h>
-#import "IJKMediaControl.h"
+// #import "IJKMediaControl.h"
 
 @interface RCTIJKPlayer ()
 
@@ -57,23 +57,23 @@
     [IJKFFMoviePlayerController checkIfFFmpegVersionMatch:YES];
     // [IJKFFMoviePlayerController checkIfPlayerVersionMatch:YES major:1 minor:0 micro:0];
 
-    IJKFFOptions *options = [IJKFFOptions optionsByDefault];
+    // IJKFFOptions *options = [IJKFFOptions optionsByDefault];
 
-    self.url = [NSURL URLWithString:@"/Users/cong/Downloads/111.mov"];
-    self.player = [[IJKFFMoviePlayerController alloc] initWithContentURL:self.url withOptions:options];
-    self.player.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    self.player.view.frame = self.bounds;
-    self.player.scalingMode = IJKMPMovieScalingModeAspectFit;
-    self.player.shouldAutoplay = YES;
+    // self.url = [NSURL URLWithString:@"/Users/cong/Downloads/111.mov"];
+    // self.player = [[IJKFFMoviePlayerController alloc] initWithContentURL:self.url withOptions:options];
+    // self.player.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    // self.player.view.frame = self.bounds;
+    // self.player.scalingMode = IJKMPMovieScalingModeAspectFit;
+    // self.player.shouldAutoplay = YES;
 
-    self.autoresizesSubviews = YES;
-    [self addSubview:self.player.view];
-    [self addSubview:self.mediaControl];
+    // self.autoresizesSubviews = YES;
+    // [self addSubview:self.player.view];
+    // [self addSubview:self.mediaControl];
 
-    self.mediaControl.delegatePlayer = self.player;
-    [self installMovieNotificationObservers];
+    // self.mediaControl.delegatePlayer = self.player;
+    // [self installMovieNotificationObservers];
 
-    [self.player prepareToPlay];
+    // [self.player prepareToPlay];
 
   return self;
 }
@@ -81,9 +81,6 @@
 - (void)layoutSubviews
 {
   [super layoutSubviews];
-  self.bounds = CGRectMake(0, 0, [[UIScreen mainScreen] applicationFrame].size.width,
-                             [[UIScreen mainScreen] applicationFrame].size.height);
-
   return;
 }
 
@@ -109,70 +106,70 @@
     //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark IBAction
+// #pragma mark IBAction
 
-- (IBAction)onClickMediaControl:(id)sender
-{
-    [self.mediaControl showAndFade];
-}
+// - (IBAction)onClickMediaControl:(id)sender
+// {
+//     [self.mediaControl showAndFade];
+// }
 
-- (IBAction)onClickOverlay:(id)sender
-{
-    [self.mediaControl hide];
-}
+// - (IBAction)onClickOverlay:(id)sender
+// {
+//     [self.mediaControl hide];
+// }
 
-- (IBAction)onClickDone:(id)sender
-{
-    //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
+// - (IBAction)onClickDone:(id)sender
+// {
+//     //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+// }
 
-- (IBAction)onClickHUD:(UIBarButtonItem *)sender
-{
-    if ([self.player isKindOfClass:[IJKFFMoviePlayerController class]]) {
-        IJKFFMoviePlayerController *player = self.player;
-        player.shouldShowHudView = !player.shouldShowHudView;
+// - (IBAction)onClickHUD:(UIBarButtonItem *)sender
+// {
+//     if ([self.player isKindOfClass:[IJKFFMoviePlayerController class]]) {
+//         IJKFFMoviePlayerController *player = self.player;
+//         player.shouldShowHudView = !player.shouldShowHudView;
 
-        sender.title = (player.shouldShowHudView ? @"HUD On" : @"HUD Off");
-    }
-}
+//         sender.title = (player.shouldShowHudView ? @"HUD On" : @"HUD Off");
+//     }
+// }
 
-- (IBAction)onClickPlay:(id)sender
-{
-    [self.player play];
-    [self.mediaControl refreshMediaControl];
-}
+// - (IBAction)onClickPlay:(id)sender
+// {
+//     [self.player play];
+//     [self.mediaControl refreshMediaControl];
+// }
 
-- (IBAction)onClickPause:(id)sender
-{
-    [self.player pause];
-    [self.mediaControl refreshMediaControl];
-}
+// - (IBAction)onClickPause:(id)sender
+// {
+//     [self.player pause];
+//     [self.mediaControl refreshMediaControl];
+// }
 
-- (IBAction)didSliderTouchDown
-{
-    [self.mediaControl beginDragMediaSlider];
-}
+// - (IBAction)didSliderTouchDown
+// {
+//     [self.mediaControl beginDragMediaSlider];
+// }
 
-- (IBAction)didSliderTouchCancel
-{
-    [self.mediaControl endDragMediaSlider];
-}
+// - (IBAction)didSliderTouchCancel
+// {
+//     [self.mediaControl endDragMediaSlider];
+// }
 
-- (IBAction)didSliderTouchUpOutside
-{
-    [self.mediaControl endDragMediaSlider];
-}
+// - (IBAction)didSliderTouchUpOutside
+// {
+//     [self.mediaControl endDragMediaSlider];
+// }
 
-- (IBAction)didSliderTouchUpInside
-{
-    self.player.currentPlaybackTime = self.mediaControl.mediaProgressSlider.value;
-    [self.mediaControl endDragMediaSlider];
-}
+// - (IBAction)didSliderTouchUpInside
+// {
+//     self.player.currentPlaybackTime = self.mediaControl.mediaProgressSlider.value;
+//     [self.mediaControl endDragMediaSlider];
+// }
 
-- (IBAction)didSliderValueChanged
-{
-    [self.mediaControl continueDragMediaSlider];
-}
+// - (IBAction)didSliderValueChanged
+// {
+//     [self.mediaControl continueDragMediaSlider];
+// }
 
 - (void)loadStateDidChange:(NSNotification*)notification
 {
@@ -232,6 +229,10 @@
     //    MPMoviePlaybackStateInterrupted,
     //    MPMoviePlaybackStateSeekingForward,
     //    MPMoviePlaybackStateSeekingBackward
+    NSDictionary *event = @{
+        @"state": [[NSNumber numberWithInt:(int)_player.playbackState] stringValue],
+        };
+    [self.bridge.eventDispatcher sendAppEventWithName:@"PlayBackState" body:event];
 
     switch (_player.playbackState)
     {
@@ -300,4 +301,66 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:IJKMPMoviePlayerPlaybackStateDidChangeNotification object:_player];
 }
 
+- (void)resume
+{
+    if (self.player) {
+        [self.player play];
+    }
+}
+
+- (void)pause
+{
+    if (self.player) {
+        [self.player pause];
+    }
+}
+
+- (void)shutdown
+{
+    if (self.player) {
+        [self.player shutdown];
+    }
+}
+
+- (void)stop
+{
+    if (self.player) {
+        [self.player stop];
+    }
+}
+
+- (void)seekTo:(NSTimeInterval)currentPlaybackTime
+{
+    if (self.player) {
+      NSLog(@"(void)seekTo:(NSTimeInterval)currentPlaybackTime %f\n", currentPlaybackTime);
+      self.player.currentPlaybackTime = currentPlaybackTime;
+    }
+}
+
+- (void)startWithOptions:(NSDictionary *)options
+{
+  if (self.player) {
+    self.player = nil;
+  }
+  NSString *URL = (NSString *)(options[@"url"]);
+  NSLog(@"URL: %@", URL);
+
+  self.url = [NSURL URLWithString:URL];
+
+    IJKFFOptions *ijkOptions = [IJKFFOptions optionsByDefault];
+    self.player = [[IJKFFMoviePlayerController alloc] initWithContentURL:self.url withOptions:ijkOptions];
+    self.player.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    self.player.view.frame = self.bounds;
+    self.player.scalingMode = IJKMPMovieScalingModeAspectFit;
+    self.player.shouldAutoplay = YES;
+    [self.player setPauseInBackground:YES];
+    self.autoresizesSubviews = YES;
+    [self addSubview:self.player.view];
+    //[self addSubview:self.mediaControl];
+
+    //self.mediaControl.delegatePlayer = self.player;
+    [self installMovieNotificationObservers];
+
+    [self.player prepareToPlay];
+}
 @end

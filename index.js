@@ -18,12 +18,18 @@ function convertNativeProps(props) {
 }
 
 export default class RCTIJKPlayer extends Component {
-    // definition of iOS, Android definition has been mapped to 2,5,6
-    static LiveState = {
+
+    static PlayBackState = {
+        IJKMPMoviePlaybackStateStopped: '0',
+        IJKMPMoviePlaybackStatePlaying: '1',
+        IJKMPMoviePlaybackStatePaused: '2',
+        IJKMPMoviePlaybackStateInterrupted: '3',
+        IJKMPMoviePlaybackStateSeekingForward: '4',
+        IJKMPMoviePlaybackStateSeekingBackward: '5',
     }
 
     static constants = {
-        LiveState: RCTIJKPlayer.LiveState,
+        PlayBackState: RCTIJKPlayer.PlayBackState,
     };
 
     static propTypes = {
@@ -49,11 +55,11 @@ export default class RCTIJKPlayer extends Component {
 
     async componentWillMount() {
         const emitter = Platform.OS == 'ios' ? NativeAppEventEmitter : DeviceEventEmitter;
-        this.liveStatusChangeListener = emitter.addListener('LiveStateChange', this._onLiveStateChange);
+        this.playBackStateChangeListener = emitter.addListener('PlayBackState', this._onPlayBackStateChange);
     }
 
     componentWillUnmount() {
-        this.liveStatusChangeListener.remove();
+        this.playBackStateChangeListener.remove();
 
 
         if (this.state.isRecording) {
@@ -65,24 +71,34 @@ export default class RCTIJKPlayer extends Component {
         const style = [styles.base, this.props.style];
         const nativeProps = convertNativeProps(this.props);
 
-        return <RCTIJKPlayer ref={RCTIJKPLAYER_REF} {...nativeProps} />;
+        return <_RCTIJKPlayer ref={REF} {...nativeProps} />;
     }
 
-    _onLiveStateChange = (data) => {
-        if (this.props.onLiveStateChange) this.props.onLiveStateChange(data)
+    _onPlayBackStateChange = (data) => {
+        this.playBackState = data.state;
+        console.log("********_onPlayBackStateChange", data.state);
+        if (this.props.onPlayBackStateChange) this.props.onPlayBackStateChange(data)
     };
+
+    isPlaying() {
+        return this.playBackState == RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStatePlaying;
+    }
+
+    test() {
+        console.log("&&&&&&&&&&&&&&&&");
+    }
 
     start(options) {
         const props = convertNativeProps(this.props);
         console.log("ijkplayer index start begin");
-        this.setState({ isRecording: true });
-        // return IJKPlayerManager.start(options);
+        // this.setState({ isRecording: true });
+        return IJKPlayerManager.start(options);
     }
 
     stop() {
         console.log("stop");
-        this.setState({ isRecording: false });
-        // IJKPlayerManager.stop();
+        // this.setState({ isRecording: false });
+        IJKPlayerManager.stop();
     }
 
     mute() {
@@ -92,7 +108,12 @@ export default class RCTIJKPlayer extends Component {
 
     resume() {
         console.log("resume");
-        // IJKPlayerManager.resume();
+        IJKPlayerManager.resume();
+    }
+
+    pause() {
+        console.log("pause");
+        IJKPlayerManager.pause();
     }
 
     hasFlash() {
@@ -102,13 +123,24 @@ export default class RCTIJKPlayer extends Component {
                 type: props.type
             });
         }
-        // return IJKPlayerManager.hasFlash();
+    }
+
+    playbackInfo() {
+        let self = this;
+        console.log("typeof(self)", typeof(self))
+        return IJKPlayerManager.playbackInfo()
+            .then(data => {
+                console.log("typeof(self),self.props", typeof(self), typeof(self.props));
+                console.log('********playbackInfo');
+                if (self.props.onPlayBackInfo) self.props.onPlayBackInfo(data);
+            });
     }
 }
 
 export const constants = RCTIJKPlayer.constants;
 
-const RCTIJKPlayer = requireNativeComponent('RCTIJKPlayer', RCTIJKPlayer);
+const _RCTIJKPlayer = requireNativeComponent('RCTIJKPlayer', RCTIJKPlayer);
+// requireNativeComponent('RCTIJKPlayer', RCTIJKPlayer);
 
 const styles = StyleSheet.create({
     base: {},

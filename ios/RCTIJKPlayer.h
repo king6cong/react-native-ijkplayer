@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <IJKMediaFramework/IJKMediaFramework.h>
-@class IJKMediaControl;
+/* @class IJKMediaControl; */
 
 @class RCTIJKPlayerManager;
 
@@ -9,13 +9,14 @@
 
 @property(atomic,strong) NSURL *url;
 @property(atomic, retain) id<IJKMediaPlayback> player;
-@property(nonatomic,strong) IBOutlet IJKMediaControl *mediaControl;
+//@property(nonatomic,strong) IBOutlet IJKMediaControl *mediaControl;
 
 
 - (id)initWithManager:(RCTIJKPlayerManager*)manager bridge:(RCTBridge *)bridge;
-- (void)start;
-- (void)startWithURL:(NSString *)pushURL;
+- (void)startWithOptions:(NSDictionary *)options;
 - (void)stop;
-- (void)mute;
 - (void)resume;
+- (void)pause;
+- (void)shutdown;
+- (void)seekTo:(NSTimeInterval)currentPlaybackTime;
 @end
