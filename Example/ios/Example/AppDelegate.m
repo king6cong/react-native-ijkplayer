@@ -32,6 +32,8 @@
    */
 
   jsCodeLocation = [NSURL URLWithString:@"http://10.2.215.60:8081/index.ios.bundle?platform=ios&dev=true"];
+  //jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.141:8081/index.ios.bundle?platform=ios&dev=true"];
+
 
   /**
    * OPTION 2
