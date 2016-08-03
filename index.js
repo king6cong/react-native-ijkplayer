@@ -60,11 +60,10 @@ export default class RCTIJKPlayer extends Component {
 
     componentWillUnmount() {
         this.playBackStateChangeListener.remove();
-
-
-        if (this.state.isRecording) {
-            // this.stop();
-        }
+        this.stop();
+        this.shutdown();
+        // if (this.state.isRecording) {
+        // }
     }
 
     render() {
@@ -76,16 +75,12 @@ export default class RCTIJKPlayer extends Component {
 
     _onPlayBackStateChange = (data) => {
         this.playBackState = data.state;
-        console.log("********_onPlayBackStateChange", data.state);
+        console.log("_onPlayBackStateChange", data.state);
         if (this.props.onPlayBackStateChange) this.props.onPlayBackStateChange(data)
     };
 
     isPlaying() {
         return this.playBackState == RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStatePlaying;
-    }
-
-    test() {
-        console.log("&&&&&&&&&&&&&&&&");
     }
 
     start(options) {
@@ -116,31 +111,29 @@ export default class RCTIJKPlayer extends Component {
         IJKPlayerManager.pause();
     }
 
-    hasFlash() {
-        if (Platform.OS === 'android') {
-            const props = convertNativeProps(this.props);
-            return IJKPlayerManager.hasFlash({
-                type: props.type
-            });
-        }
+    shutdown() {
+        console.log("shutdown");
+        IJKPlayerManager.shutdown();
+    }
+
+    seekTo(currentPlaybackTime) {
+        console.log("seekTo ", currentPlaybackTime);
+        IJKPlayerManager.seekTo(currentPlaybackTime);
     }
 
     playbackInfo() {
         let self = this;
-        console.log("typeof(self)", typeof(self))
         return IJKPlayerManager.playbackInfo()
             .then(data => {
-                console.log("typeof(self),self.props", typeof(self), typeof(self.props));
-                console.log('********playbackInfo');
+                // console.log(data);
                 if (self.props.onPlayBackInfo) self.props.onPlayBackInfo(data);
-            });
+            }).catch(error => console.log("error", error));
     }
 }
 
 export const constants = RCTIJKPlayer.constants;
 
 const _RCTIJKPlayer = requireNativeComponent('RCTIJKPlayer', RCTIJKPlayer);
-// requireNativeComponent('RCTIJKPlayer', RCTIJKPlayer);
 
 const styles = StyleSheet.create({
     base: {},
