@@ -17,30 +17,15 @@ public class RCTIJKPlayer {
         return ourInstance;
     }
 
+    public static RCTIJKPlayerView getViewInstance() {
+        return ourInstance.mIJKPlayerView;
+    }
+
     public void setIJKPlayerView(RCTIJKPlayerView mIJKPlayerView) {
         this.mIJKPlayerView = mIJKPlayerView;
     }
 
-
     private RCTIJKPlayer() {
-    }
-
-    public void start(String pushURL) {
-        mIJKPlayerView.start(pushURL);
-    }
-
-
-    public void stop() {
-        // mIJKPlayerView.stop();
-        Log.e("RCTIJKPlayer", String.format("stop"));
-    }
-
-    public void mute() {
-        // mIJKPlayerView.mute();
-    }
-
-    public void resume() {
-        // mIJKPlayerView.resume();
     }
 
 }

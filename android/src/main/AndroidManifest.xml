@@ -1,7 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="me.yiii.RCTIJKPlayer">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="me.yiii.RCTIJKPlayer"
+          xmlns:tools="http://schemas.android.com/tools">
   <uses-feature android:name="android.hardware.camera" />
   <uses-feature android:name="android.hardware.camera.autofocus" />
-
+  <uses-sdk tools:overrideLibrary="tv.danmaku.ijk.media.player_arm64"/>
+  <uses-sdk tools:overrideLibrary="com.example.ijkplayer_x86_64"/>
   <uses-permission android:name="android.permission.CAMERA" />
   <uses-permission android:name="android.permission.RECORD_AUDIO" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

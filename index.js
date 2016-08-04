@@ -55,11 +55,11 @@ export default class RCTIJKPlayer extends Component {
 
     async componentWillMount() {
         const emitter = Platform.OS == 'ios' ? NativeAppEventEmitter : DeviceEventEmitter;
-        this.playBackStateChangeListener = emitter.addListener('PlayBackState', this._onPlayBackStateChange);
+        // this.playBackStateChangeListener = emitter.addListener('PlayBackState', this._onPlayBackStateChange);
     }
 
     componentWillUnmount() {
-        this.playBackStateChangeListener.remove();
+        // this.playBackStateChangeListener.remove();
         this.stop();
         this.shutdown();
         // if (this.state.isRecording) {
@@ -73,11 +73,11 @@ export default class RCTIJKPlayer extends Component {
         return <_RCTIJKPlayer ref={REF} {...nativeProps} />;
     }
 
-    _onPlayBackStateChange = (data) => {
-        this.playBackState = data.state;
-        console.log("_onPlayBackStateChange", data.state);
-        if (this.props.onPlayBackStateChange) this.props.onPlayBackStateChange(data)
-    };
+    // _onPlayBackStateChange = (data) => {
+    //     this.playBackState = data.state;
+    //     console.log("_onPlayBackStateChange", data.state);
+    //     if (this.props.onPlayBackStateChange) this.props.onPlayBackStateChange(data)
+    // };
 
     isPlaying() {
         return this.playBackState == RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStatePlaying;
@@ -126,6 +126,7 @@ export default class RCTIJKPlayer extends Component {
         return IJKPlayerManager.playbackInfo()
             .then(data => {
                 // console.log(data);
+                this.playBackState = data.playbackState;
                 if (self.props.onPlayBackInfo) self.props.onPlayBackInfo(data);
             }).catch(error => console.log("error", error));
     }

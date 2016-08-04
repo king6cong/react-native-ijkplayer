@@ -11,6 +11,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableNativeMap;
+import com.facebook.react.bridge.WritableMap;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -44,27 +46,59 @@ public class RCTIJKPlayerModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void start(final ReadableMap options, final Promise promise) {
-        String pushURL = options.getString("push_url");
-        Log.e(TAG, "start pushURL: " + pushURL);
-        // RCTIJKPlayer.getInstance().start(pushURL);
+        String URL = options.getString("url");
+        Log.e(TAG, "start URL: " + URL);
+        RCTIJKPlayer.getViewInstance().start(URL);
     }
 
     @ReactMethod
     public void stop() {
         Log.e(TAG, "stop");
-        // RCTIJKPlayer.getInstance().stop();
+        RCTIJKPlayer.getViewInstance().stop();
     }
 
     @ReactMethod
-    public void mute() {
-        Log.e(TAG, "mute");
-        // RCTIJKPlayer.getInstance().mute();
+    public void pause() {
+        Log.e(TAG, "pause");
+        RCTIJKPlayer.getViewInstance().pause();
     }
 
     @ReactMethod
     public void resume() {
         Log.e(TAG, "resume");
-        // RCTIJKPlayer.getInstance().resume();
+        RCTIJKPlayer.getViewInstance().resume();
     }
+
+    @ReactMethod
+    public void shutdown() {
+        Log.e(TAG, "shutdown");
+        RCTIJKPlayer.getViewInstance().shutdown();
+    }
+
+    @ReactMethod
+    public void seekTo(double currentPlaybackTime) {
+        Log.e(TAG, "seekTo "+ currentPlaybackTime);
+        RCTIJKPlayer.getViewInstance().seekTo(currentPlaybackTime);
+    }
+
+    @ReactMethod
+    public void playbackInfo(final Promise promise) {
+        IjkVideoView player = RCTIJKPlayer.getViewInstance().getPlayer();
+        WritableMap data = new WritableNativeMap();
+        int currentPlaybackTime = player.getCurrentPosition() / 1000;
+        int duration = player.getDuration() / 1000;
+        int bufferingProgress = player.getBufferPercentage();
+        int playbackState = player.CurrentState();
+
+        data.putString("currentPlaybackTime", Integer.toString(currentPlaybackTime));
+        data.putString("duration", Integer.toString(duration));
+        data.putString("playableDuration", "");
+        data.putString("bufferingProgress", Integer.toString(bufferingProgress));
+        data.putString("playbackState", Integer.toString(playbackState));
+        data.putString("loadState", "");
+        data.putString("isPreparedToPlay", "");
+        promise.resolve(data);
+    }
+
 
 }
