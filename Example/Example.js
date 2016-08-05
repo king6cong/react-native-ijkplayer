@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import RCTIJKPlayer from 'react-native-ijkplayer';
 var {height, width} = Dimensions.get('window');
-// var screen_height, screen_width = height, width;
 // height = height/2;
 // width = width;
 console.log("width, height", width, height);
@@ -33,6 +32,7 @@ const styles = StyleSheet.create({
     player: {
         width: width,
         height: height,
+        backgroundColor: 'rgba(0,0,0,1)',
     },
     mediaBtnView: {
         // position: 'absolute',
@@ -79,8 +79,6 @@ export default class Example extends React.Component {
         this.state = {
             playBackInfo: {
             },
-            playBackState: {
-            },
             fadeAnim: new Animated.Value(1),
             hasController: false,
         };
@@ -96,6 +94,9 @@ export default class Example extends React.Component {
     }
 
     fadeIn() {
+        // this.setState({hasController: true, fadeAnim: new Animated.Value(1)});
+        // this.showing = true;
+
         Animated.timing(
             this.state.fadeAnim,
             {toValue: 1}
@@ -124,12 +125,12 @@ export default class Example extends React.Component {
     }
 
     resumePause() {
-        if (this.rctijkplayer.isPlaying()) {
+        if (this.state.playBackInfo.playbackState == RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStatePlaying) {
             this.rctijkplayer.pause();
-            this.setState({playBackInfo: Object.assign({playbackState: RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStatePaused}, this.state.playBackInfo)});
+            this.setState({playBackInfo: Object.assign({}, this.state.playBackInfo, {playbackState: RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStatePaused})});
         } else {
             this.rctijkplayer.resume();
-            this.setState({playBackInfo: Object.assign({playbackState: RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStatePlaying}, this.state.playBackInfo)});
+            this.setState({playBackInfo: Object.assign({}, this.state.playBackInfo, {playbackState: RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStatePlaying})});
         }
         this.hideController();
     }
@@ -145,9 +146,7 @@ export default class Example extends React.Component {
         let playIcon = (<Icon name="play-circle" size={iconSize} color="#1E5C98" style={styles.btn} onPress={this.resumePause.bind(this)}/>)
         let pauseIcon = (<Icon name="pause-circle" size={iconSize} color="#1E5C98" style={styles.btn} onPress={this.resumePause.bind(this)}/>)
 
-        console.log("this.state.playBackInfo.playbackState", this.state.playBackInfo.playbackState);
-        // switch(this.state.playBackState) {
-        switch(""+this.state.playBackInfo.playbackState) {
+        switch(this.state.playBackInfo.playbackState) {
         case RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStateStopped:
             return playIcon;
             break;
@@ -185,9 +184,9 @@ export default class Example extends React.Component {
                )
     }
 
-    onPlayBackStateChange(e) {
-        this.setState({playBackState: e.state});
-    }
+    // onPlayBackStateChange(e) {
+    //     this.setState({playBackState: e.state});
+    // }
 
     onPlayBackInfo(e) {
         if (this.sliderDragging) {
@@ -235,7 +234,6 @@ export default class Example extends React.Component {
                 ref={(rctijkplayer) => {
                     this.rctijkplayer = rctijkplayer;
                 }}
-                onPlayBackStateChange={(e) => this.onPlayBackStateChange(e)}
                 onPlayBackInfo={(e) => this.onPlayBackInfo(e)}
                 style={styles.player}
                 >

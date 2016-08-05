@@ -42,18 +42,14 @@ public class RCTIJKPlayerView extends FrameLayout {
         this._context = context;
         this.activity = activity;
 
-        framelayout = new FrameLayout(context);
-        // framelayout.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-        //         LayoutParams.MATCH_PARENT));
+        // framelayout = new FrameLayout(context);
 
         IjkMediaPlayer.loadLibrariesOnce(null);
         IjkMediaPlayer.native_profileBegin("libijkplayer.so");
 
         mIJKPlayerView = new IjkVideoView(context);
-        // mIJKPlayerView.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-        //         LayoutParams.MATCH_PARENT));
 
-        framelayout.addView(mIJKPlayerView);
+        // framelayout.addView(mIJKPlayerView);
 
         RCTIJKPlayer.getInstance().setIJKPlayerView(this);
 
@@ -63,27 +59,25 @@ public class RCTIJKPlayerView extends FrameLayout {
         // mIJKPlayerView.setVideoPath(mVideoPath);
         // mIJKPlayerView.start();
 
-        // mPreviewView = new SurfaceView(_context);
-        // mPreviewView.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-        //         LayoutParams.MATCH_PARENT));
-
-        addView(framelayout);
+        // addView(framelayout);
+        addView(mIJKPlayerView);
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         Log.e(TAG, String.format("this.getLeft(), this.getTop(), this.getRight(), this.getBottom() %d %d %d %d", this.getLeft(), this.getTop(), this.getRight(), this.getBottom()));
-        framelayout.layout(this.getLeft(), this.getTop(), this.getRight(), this.getBottom());
+        // framelayout.layout(this.getLeft(), this.getTop(), this.getRight(), this.getBottom());
+        mIJKPlayerView.layout(this.getLeft(), this.getTop(), this.getRight(), this.getBottom());
         this.postInvalidate(this.getLeft(), this.getTop(), this.getRight(), this.getBottom());
     }
 
-    @Override
-    public void onViewAdded(View child) {
-        Log.e(TAG, String.format("onViewAdded " + child));
-        if (this.framelayout == child) return;
-        this.removeView(this.framelayout);
-        this.addView(this.framelayout, 0);
-    }
+    // @Override
+    // public void onViewAdded(View child) {
+    //     Log.e(TAG, String.format("onViewAdded " + child));
+    //     if (this.framelayout == child) return;
+    //     this.removeView(this.framelayout);
+    //     this.addView(this.framelayout, 0);
+    // }
 
     private void sendEvent(int state) {
         Log.e(TAG, "sendEvent");

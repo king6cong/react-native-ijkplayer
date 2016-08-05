@@ -20,12 +20,12 @@ function convertNativeProps(props) {
 export default class RCTIJKPlayer extends Component {
 
     static PlayBackState = {
-        IJKMPMoviePlaybackStateStopped: '0',
-        IJKMPMoviePlaybackStatePlaying: '1',
-        IJKMPMoviePlaybackStatePaused: '2',
-        IJKMPMoviePlaybackStateInterrupted: '3',
-        IJKMPMoviePlaybackStateSeekingForward: '4',
-        IJKMPMoviePlaybackStateSeekingBackward: '5',
+        IJKMPMoviePlaybackStateStopped: 0,
+        IJKMPMoviePlaybackStatePlaying: 1,
+        IJKMPMoviePlaybackStatePaused: 2,
+        IJKMPMoviePlaybackStateInterrupted: 3,
+        IJKMPMoviePlaybackStateSeekingForward: 4,
+        IJKMPMoviePlaybackStateSeekingBackward: 5,
     }
 
     static constants = {
@@ -62,8 +62,6 @@ export default class RCTIJKPlayer extends Component {
         // this.playBackStateChangeListener.remove();
         this.stop();
         this.shutdown();
-        // if (this.state.isRecording) {
-        // }
     }
 
     render() {
@@ -71,16 +69,6 @@ export default class RCTIJKPlayer extends Component {
         const nativeProps = convertNativeProps(this.props);
 
         return <_RCTIJKPlayer ref={REF} {...nativeProps} />;
-    }
-
-    // _onPlayBackStateChange = (data) => {
-    //     this.playBackState = data.state;
-    //     console.log("_onPlayBackStateChange", data.state);
-    //     if (this.props.onPlayBackStateChange) this.props.onPlayBackStateChange(data)
-    // };
-
-    isPlaying() {
-        return this.playBackState == RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStatePlaying;
     }
 
     start(options) {
@@ -92,13 +80,7 @@ export default class RCTIJKPlayer extends Component {
 
     stop() {
         console.log("stop");
-        // this.setState({ isRecording: false });
         IJKPlayerManager.stop();
-    }
-
-    mute() {
-        console.log("mute");
-        // IJKPlayerManager.mute();
     }
 
     resume() {
@@ -125,8 +107,10 @@ export default class RCTIJKPlayer extends Component {
         let self = this;
         return IJKPlayerManager.playbackInfo()
             .then(data => {
+                for (var k in data) {
+                    data[k] = +data[k];
+                }
                 // console.log(data);
-                this.playBackState = data.playbackState;
                 if (self.props.onPlayBackInfo) self.props.onPlayBackInfo(data);
             }).catch(error => console.log("error", error));
     }
