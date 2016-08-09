@@ -13,6 +13,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.UiThreadUtil;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -46,9 +47,13 @@ public class RCTIJKPlayerModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void start(final ReadableMap options, final Promise promise) {
-        String URL = options.getString("url");
-        Log.e(TAG, "start URL: " + URL);
-        RCTIJKPlayer.getViewInstance().start(URL);
+        final String URL = options.getString("url");
+        UiThreadUtil.runOnUiThread(new Runnable() {
+            public void run() {
+                Log.e(TAG, "****start URL: " + URL);
+                RCTIJKPlayer.getViewInstance().start(URL);
+            }
+        });
     }
 
     @ReactMethod

@@ -36,6 +36,8 @@ import tv.danmaku.ijk.media.player.misc.IMediaFormat;
 import tv.danmaku.ijk.media.player.misc.ITrackInfo;
 import tv.danmaku.ijk.media.player.misc.IjkMediaFormat;
 
+import com.facebook.react.bridge.UiThreadUtil;
+
 public class IjkVideoView extends FrameLayout {
 // public class IjkVideoView extends FrameLayout implements MediaController.MediaPlayerControl {
     private String TAG = "IjkVideoView";
@@ -63,13 +65,11 @@ public class IjkVideoView extends FrameLayout {
     // All the stuff we need for playing and showing a video
     private IRenderView.ISurfaceHolder mSurfaceHolder = null;
     private IMediaPlayer mMediaPlayer = null;
-    // private int         mAudioSession;
     private int mVideoWidth;
     private int mVideoHeight;
     private int mSurfaceWidth;
     private int mSurfaceHeight;
     private int mVideoRotationDegree;
-    // private IMediaController mMediaController;
     private IMediaPlayer.OnCompletionListener mOnCompletionListener;
     private IMediaPlayer.OnPreparedListener mOnPreparedListener;
     private int mCurrentBufferPercentage;
@@ -80,21 +80,11 @@ public class IjkVideoView extends FrameLayout {
     private boolean mCanSeekBack = true;
     private boolean mCanSeekForward = true;
 
-    /** Subtitle rendering widget overlaid on top of the video. */
-    // private RenderingWidget mSubtitleWidget;
-
-    /**
-     * Listener for changes to subtitle data, used to redraw when needed.
-     */
-    // private RenderingWidget.OnChangedListener mSubtitlesChangedListener;
-
     private Context mAppContext;
-    // private Settings mSettings;
     private IRenderView mRenderView;
     private int mVideoSarNum;
     private int mVideoSarDen;
-
-    // private InfoHudViewHolder mHudViewHolder;
+    RCTIJKPlayerView container;
 
     public IjkVideoView(Context context) {
         super(context);
@@ -125,12 +115,16 @@ public class IjkVideoView extends FrameLayout {
     private void initVideoView(Context context) {
         mAppContext = context.getApplicationContext();
         // mSettings = new Settings(mAppContext);
+        // mVideoWidth = 400;
+        // mVideoHeight = 300;
+        mVideoWidth = 0;
+        mVideoHeight = 0;
 
         initBackground();
         initRenders();
 
-        mVideoWidth = 0;
-        mVideoHeight = 0;
+        // mVideoWidth = 0;
+        // mVideoHeight = 0;
         // REMOVED: getHolder().addCallback(mSHCallback);
         // REMOVED: getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         setFocusable(true);
@@ -157,6 +151,7 @@ public class IjkVideoView extends FrameLayout {
 
         mRenderView = renderView;
         renderView.setAspectRatio(mCurrentAspectRatio);
+        Log.e(TAG, String.format("videosize setRenderView %d %d\n", mVideoWidth, mVideoHeight));
         if (mVideoWidth > 0 && mVideoHeight > 0)
             renderView.setVideoSize(mVideoWidth, mVideoHeight);
         if (mVideoSarNum > 0 && mVideoSarDen > 0)
@@ -184,6 +179,7 @@ public class IjkVideoView extends FrameLayout {
                 if (mMediaPlayer != null) {
                     renderView.getSurfaceHolder().bindToMediaPlayer(mMediaPlayer);
                     renderView.setVideoSize(mMediaPlayer.getVideoWidth(), mMediaPlayer.getVideoHeight());
+                    Log.e(TAG, String.format("videosize mMediaPlayer %d %d\n", mMediaPlayer.getVideoWidth(), mMediaPlayer.getVideoHeight()));
                     renderView.setVideoSampleAspectRatio(mMediaPlayer.getVideoSarNum(), mMediaPlayer.getVideoSarDen());
                     renderView.setAspectRatio(mCurrentAspectRatio);
                 }
@@ -306,11 +302,15 @@ public class IjkVideoView extends FrameLayout {
                     mVideoSarDen = mp.getVideoSarDen();
                     if (mVideoWidth != 0 && mVideoHeight != 0) {
                         if (mRenderView != null) {
+                            Log.e(TAG, String.format("videosize onVideoSizeChanged setVideoSize %d %d", mVideoWidth, mVideoHeight));
+
                             mRenderView.setVideoSize(mVideoWidth, mVideoHeight);
                             mRenderView.setVideoSampleAspectRatio(mVideoSarNum, mVideoSarDen);
                         }
                         // REMOVED: getHolder().setFixedSize(mVideoWidth, mVideoHeight);
                         requestLayout();
+                        // refresh();
+                        // initRenders();
                     }
                 }
             };
@@ -340,6 +340,7 @@ public class IjkVideoView extends FrameLayout {
                 // REMOVED: getHolder().setFixedSize(mVideoWidth, mVideoHeight);
                 if (mRenderView != null) {
                     mRenderView.setVideoSize(mVideoWidth, mVideoHeight);
+                    Log.e(TAG, String.format("videosize onPrepared setVideoSize %d %d\n", mVideoWidth, mVideoHeight));
                     mRenderView.setVideoSampleAspectRatio(mVideoSarNum, mVideoSarDen);
                     if (!mRenderView.shouldWaitForResize() || mSurfaceWidth == mVideoWidth && mSurfaceHeight == mVideoHeight) {
                         // We didn't actually change the size (it was already at the size
@@ -711,25 +712,7 @@ public class IjkVideoView extends FrameLayout {
     // Extend: Aspect Ratio
     //-------------------------
 
-    private static final int[] s_allAspectRatio = {
-            IRenderView.AR_ASPECT_FIT_PARENT,
-            IRenderView.AR_ASPECT_FILL_PARENT,
-            IRenderView.AR_ASPECT_WRAP_CONTENT,
-            // IRenderView.AR_MATCH_PARENT,
-            IRenderView.AR_16_9_FIT_PARENT,
-            IRenderView.AR_4_3_FIT_PARENT};
-    private int mCurrentAspectRatioIndex = 0;
-    private int mCurrentAspectRatio = s_allAspectRatio[0];
-
-    // public int toggleAspectRatio() {
-    //     mCurrentAspectRatioIndex++;
-    //     mCurrentAspectRatioIndex %= s_allAspectRatio.length;
-
-    //     mCurrentAspectRatio = s_allAspectRatio[mCurrentAspectRatioIndex];
-    //     if (mRenderView != null)
-    //         mRenderView.setAspectRatio(mCurrentAspectRatio);
-    //     return mCurrentAspectRatio;
-    // }
+    private int mCurrentAspectRatio = IRenderView.AR_ASPECT_FIT_PARENT;
 
     //-------------------------
     // Extend: Render
@@ -738,23 +721,7 @@ public class IjkVideoView extends FrameLayout {
     public static final int RENDER_SURFACE_VIEW = 1;
     public static final int RENDER_TEXTURE_VIEW = 2;
 
-    private List<Integer> mAllRenders = new ArrayList<Integer>();
-    private int mCurrentRenderIndex = 0;
-    private int mCurrentRender = RENDER_NONE;
-
     private void initRenders() {
-        mAllRenders.clear();
-
-        mAllRenders.add(RENDER_SURFACE_VIEW);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-            mAllRenders.add(RENDER_TEXTURE_VIEW);
-        mAllRenders.add(RENDER_NONE);
-
-        if (mAllRenders.isEmpty())
-            mAllRenders.add(RENDER_SURFACE_VIEW);
-        mCurrentRender = mAllRenders.get(mCurrentRenderIndex);
-        // setRender(mCurrentRender);
-        // setRender(RENDER_SURFACE_VIEW);
         setRender(RENDER_TEXTURE_VIEW);
 
     }

@@ -1,6 +1,7 @@
 package me.yiii.RCTIJKPlayer;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class RCTIJKPlayerPackage implements ReactPackage {
     private Activity activity = null;
-
+    private static final String TAG = "RCTIJKPlayerPackage";
     public RCTIJKPlayerPackage(Activity activity){
         this.activity = activity;
     }

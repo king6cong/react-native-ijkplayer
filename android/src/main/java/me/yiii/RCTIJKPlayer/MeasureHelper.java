@@ -18,11 +18,13 @@ package me.yiii.RCTIJKPlayer;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 
 import java.lang.ref.WeakReference;
 
 public final class MeasureHelper {
+    private String TAG = "MeasureHelper";
     private WeakReference<View> mWeakView;
 
     private int mVideoWidth;
@@ -68,8 +70,8 @@ public final class MeasureHelper {
      * @param heightMeasureSpec
      */
     public void doMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        //Log.i("@@@@", "onMeasure(" + MeasureSpec.toString(widthMeasureSpec) + ", "
-        //        + MeasureSpec.toString(heightMeasureSpec) + ")");
+        Log.e(TAG, "onMeasure(" + View.MeasureSpec.toString(widthMeasureSpec) + ", "
+                + View.MeasureSpec.toString(heightMeasureSpec) + ")");
         if (mVideoRotationDegree == 90 || mVideoRotationDegree == 270) {
             int tempSpec = widthMeasureSpec;
             widthMeasureSpec  = heightMeasureSpec;
@@ -78,6 +80,7 @@ public final class MeasureHelper {
 
         int width = View.getDefaultSize(mVideoWidth, widthMeasureSpec);
         int height = View.getDefaultSize(mVideoHeight, heightMeasureSpec);
+        Log.e(TAG, "mCurrentAspectRatio " + mCurrentAspectRatio);
         if (mCurrentAspectRatio == IRenderView.AR_MATCH_PARENT) {
             width = widthMeasureSpec;
             height = heightMeasureSpec;
@@ -86,8 +89,9 @@ public final class MeasureHelper {
             int widthSpecSize = View.MeasureSpec.getSize(widthMeasureSpec);
             int heightSpecMode = View.MeasureSpec.getMode(heightMeasureSpec);
             int heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec);
-
+            Log.e(TAG, String.format("measure size: %d %d %d %d" ,widthSpecMode, widthSpecSize, heightSpecMode, heightSpecSize));
             if (widthSpecMode == View.MeasureSpec.AT_MOST && heightSpecMode == View.MeasureSpec.AT_MOST) {
+                Log.e(TAG, "AT_MOST");
                 float specAspectRatio = (float) widthSpecSize / (float) heightSpecSize;
                 float displayAspectRatio;
                 switch (mCurrentAspectRatio) {
@@ -151,6 +155,7 @@ public final class MeasureHelper {
                         break;
                 }
             } else if (widthSpecMode == View.MeasureSpec.EXACTLY && heightSpecMode == View.MeasureSpec.EXACTLY) {
+                Log.e(TAG, "both EXACTLY");
                 // the size is fixed
                 width = widthSpecSize;
                 height = heightSpecSize;
@@ -164,6 +169,7 @@ public final class MeasureHelper {
                     height = width * mVideoHeight / mVideoWidth;
                 }
             } else if (widthSpecMode == View.MeasureSpec.EXACTLY) {
+                Log.e(TAG, "width EXACTLY");
                 // only the width is fixed, adjust the height to match aspect ratio if possible
                 width = widthSpecSize;
                 height = width * mVideoHeight / mVideoWidth;
@@ -172,6 +178,7 @@ public final class MeasureHelper {
                     height = heightSpecSize;
                 }
             } else if (heightSpecMode == View.MeasureSpec.EXACTLY) {
+                Log.e(TAG, "height EXACTLY");
                 // only the height is fixed, adjust the width to match aspect ratio if possible
                 height = heightSpecSize;
                 width = height * mVideoWidth / mVideoHeight;
@@ -180,6 +187,7 @@ public final class MeasureHelper {
                     width = widthSpecSize;
                 }
             } else {
+                Log.e(TAG, "neither the width nor the height are fixed, try to use actual video size");
                 // neither the width nor the height are fixed, try to use actual video size
                 width = mVideoWidth;
                 height = mVideoHeight;
@@ -195,6 +203,7 @@ public final class MeasureHelper {
                 }
             }
         } else {
+            Log.e(TAG, "no size yet, just adopt the given spec sizes");
             // no size yet, just adopt the given spec sizes
         }
 

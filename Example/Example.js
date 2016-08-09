@@ -9,11 +9,14 @@ import {
     Slider,
     View,
     Animated,
+    ActivityIndicatorIOS,
+    ProgressBarAndroid,
+    Platform,
 } from 'react-native';
 import RCTIJKPlayer from 'react-native-ijkplayer';
 var {height, width} = Dimensions.get('window');
 // height = height/2;
-// width = width;
+// width = width/2;
 console.log("width, height", width, height);
 import Icon from 'react-native-vector-icons/FontAwesome';
 const iconSize = 120;
@@ -65,6 +68,17 @@ const styles = StyleSheet.create({
         top: Math.round(height/2 - iconSize/2),
         left: Math.round(width/2 - iconSize/2),
     },
+    progressView: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: width,
+        height: height,
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     slider: {
     },
 });
@@ -82,12 +96,14 @@ export default class Example extends React.Component {
             fadeAnim: new Animated.Value(1),
             hasController: false,
         };
+        this.progressIcon = this.renderProgressView();
     }
     componentDidMount() {
         let url = "http://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/gear1/prog_index.m3u8";
         // let url = "/Users/cong/Downloads/111.mov";
         this.rctijkplayer.start({url: url});
         this.playbackInfoUpdater = setInterval(this.rctijkplayer.playbackInfo.bind(this.rctijkplayer), 1000);
+        // this.setState({hasController: true,});
     }
     componentWillUnmount() {
         clearInterval(this.playbackInfoUpdater);
@@ -142,9 +158,28 @@ export default class Example extends React.Component {
         this.rctijkplayer.start(options);
     }
 
+    renderProgressView() {
+        var progress_view;
+        if (Platform.OS == 'ios') {
+            progress_view = (<ActivityIndicatorIOS
+                             animating={true}
+                             style={[]}
+                             size="large"
+                             color="#000fff"
+                             />)
+        } else {
+            progress_view = (<ProgressBarAndroid
+                             style={[]}
+                             styleAttr="Small"
+                             />)
+        }
+        return progress_view
+    }
+
     getMediaBtn() {
         let playIcon = (<Icon name="play-circle" size={iconSize} color="#1E5C98" style={styles.btn} onPress={this.resumePause.bind(this)}/>)
         let pauseIcon = (<Icon name="pause-circle" size={iconSize} color="#1E5C98" style={styles.btn} onPress={this.resumePause.bind(this)}/>)
+        // let progressIcon = this.renderProgressView();
 
         switch(this.state.playBackInfo.playbackState) {
         case RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStateStopped:
@@ -155,6 +190,9 @@ export default class Example extends React.Component {
             break;
         case RCTIJKPlayer.PlayBackState.IJKMPMoviePlaybackStatePaused:
             return playIcon;
+            break;
+        default:
+            // return progressIcon;
             break;
         }
     }

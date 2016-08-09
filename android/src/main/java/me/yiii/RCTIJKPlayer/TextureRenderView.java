@@ -19,6 +19,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -38,10 +40,13 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.ISurfaceTextureHolder;
 import tv.danmaku.ijk.media.player.ISurfaceTextureHost;
 
+import com.facebook.react.bridge.UiThreadUtil;
+
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class TextureRenderView extends TextureView implements IRenderView {
     private static final String TAG = "TextureRenderView";
     private MeasureHelper mMeasureHelper;
+    private int widthMeasureSpec, heightMeasureSpec;
 
     public TextureRenderView(Context context) {
         super(context);
@@ -94,6 +99,7 @@ public class TextureRenderView extends TextureView implements IRenderView {
     public void setVideoSize(int videoWidth, int videoHeight) {
         if (videoWidth > 0 && videoHeight > 0) {
             mMeasureHelper.setVideoSize(videoWidth, videoHeight);
+            Log.e(TAG, "requestLayout setVideoSize");
             requestLayout();
         }
     }
@@ -120,7 +126,10 @@ public class TextureRenderView extends TextureView implements IRenderView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        this.widthMeasureSpec = widthMeasureSpec;
+        this.heightMeasureSpec = heightMeasureSpec;
         mMeasureHelper.doMeasure(widthMeasureSpec, heightMeasureSpec);
+        Log.e(TAG, "setMeasuredDimension: " + mMeasureHelper.getMeasuredWidth() + " " + mMeasureHelper.getMeasuredHeight());
         setMeasuredDimension(mMeasureHelper.getMeasuredWidth(), mMeasureHelper.getMeasuredHeight());
     }
 
@@ -364,5 +373,53 @@ public class TextureRenderView extends TextureView implements IRenderView {
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
         info.setClassName(TextureRenderView.class.getName());
+    }
+
+    private final Runnable measureAndLayout = new Runnable() {
+        @Override
+        public void run() {
+            if (widthMeasureSpec != 0 && heightMeasureSpec != 0) {
+                Log.d(TAG, "post measureAndLayout");
+                measure(widthMeasureSpec, heightMeasureSpec);
+                Log.e(TAG, String.format("getLeft(), getTop(), getRight(), getBottom() %d %d %d %d", getLeft(), getTop(), getRight(), getBottom()));
+                Log.e(TAG, String.format("getLeft(), getTop(), getRight(), getBottom() %d %d %d %d", getMeasuredHeight(), getMeasuredWidth(), View.MeasureSpec.getSize(getMeasuredHeight()), View.MeasureSpec.getSize(getMeasuredWidth())));
+                // layout(getLeft(), getTop(), getRight()/2, getBottom()/2);
+
+            }
+        }
+    };
+
+
+    @Override
+    public void requestLayout() {
+        Log.d(TAG, "Overrided requestLayout called");
+        super.requestLayout();
+
+        UiThreadUtil.runOnUiThread(new Runnable() {
+            public void run() {
+                if (widthMeasureSpec != 0 && heightMeasureSpec != 0) {
+                    // TODO fix this
+                    Log.d(TAG, "ui measureAndLayout");
+                    measure(widthMeasureSpec, heightMeasureSpec);
+                    Log.e(TAG, String.format("getLeft(), getTop(), getRight(), getBottom() %d %d %d %d", getLeft(), getTop(), getRight(), getBottom()));
+                    Log.e(TAG, String.format("getLeft(), getTop(), getRight(), getBottom() %d %d %d %d", getMeasuredHeight(), getMeasuredWidth(), View.MeasureSpec.getSize(getMeasuredHeight()), View.MeasureSpec.getSize(getMeasuredWidth())));
+
+                    int left = getLeft();
+                    int top = getTop();
+                    int right = getRight();
+                    int bottom = getBottom();
+
+                    int height = View.MeasureSpec.getSize(getMeasuredHeight());
+                    int width = View.MeasureSpec.getSize(getMeasuredWidth());
+
+                    int h1 = bottom-top;
+                    layout(getLeft(), top + (h1 - height)/2, getRight(), top + (h1 - height)/2 + height);
+                }
+
+            }
+        });
+
+
+        // post(measureAndLayout);
     }
 }

@@ -41,13 +41,14 @@ public class RCTIJKPlayerView extends FrameLayout {
         super(context);
         this._context = context;
         this.activity = activity;
-
+        Log.e(TAG, "*******constructor start");
         // framelayout = new FrameLayout(context);
 
         IjkMediaPlayer.loadLibrariesOnce(null);
         IjkMediaPlayer.native_profileBegin("libijkplayer.so");
-
         mIJKPlayerView = new IjkVideoView(context);
+        // mIJKPlayerView.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+        //         LayoutParams.WRAP_CONTENT));
 
         // framelayout.addView(mIJKPlayerView);
 
@@ -61,15 +62,26 @@ public class RCTIJKPlayerView extends FrameLayout {
 
         // addView(framelayout);
         addView(mIJKPlayerView);
+        // mIJKPlayerView.setContainer(this);
     }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        Log.e(TAG, String.format("this.getLeft(), this.getTop(), this.getRight(), this.getBottom() %d %d %d %d", this.getLeft(), this.getTop(), this.getRight(), this.getBottom()));
-        // framelayout.layout(this.getLeft(), this.getTop(), this.getRight(), this.getBottom());
-        mIJKPlayerView.layout(this.getLeft(), this.getTop(), this.getRight(), this.getBottom());
-        this.postInvalidate(this.getLeft(), this.getTop(), this.getRight(), this.getBottom());
+    public void refresh() {
+        Log.e(TAG, "view refresh");
+        this.postInvalidate();
+        UiThreadUtil.runOnUiThread(new Runnable() {
+            public void run() {
+                requestLayout();
+            }
+        });
+
     }
+
+    // @Override
+    // protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+    //     Log.e(TAG, String.format("this.getLeft(), this.getTop(), this.getRight(), this.getBottom() %d %d %d %d", this.getLeft(), this.getTop(), this.getRight(), this.getBottom()));
+    //     mIJKPlayerView.layout(this.getLeft(), this.getTop(), this.getRight(), this.getBottom());
+    //     this.postInvalidate(this.getLeft(), this.getTop(), this.getRight(), this.getBottom());
+    // }
 
     // @Override
     // public void onViewAdded(View child) {
@@ -96,6 +108,8 @@ public class RCTIJKPlayerView extends FrameLayout {
             public void run() {
                 mIJKPlayerView.setVideoPath(URL);
                 mIJKPlayerView.start();
+                // RCTIJKPlayerView.this.invalidate();
+                // requestLayout();
             }
         });
     }
