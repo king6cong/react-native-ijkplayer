@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		4107014D1ACB732B00C6AA39 /* RCTIJKPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 410701481ACB732B00C6AA39 /* RCTIJKPlayer.m */; };
 		4107014E1ACB732B00C6AA39 /* RCTIJKPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4107014A1ACB732B00C6AA39 /* RCTIJKPlayerManager.m */; };
-		F4CE41431D4B34B300F505CA /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41421D4B34B300F505CA /* IJKMediaFramework.framework */; };
 		F4CE41461D4B7E5D00F505CA /* IJKMediaControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CE41451D4B7E5D00F505CA /* IJKMediaControl.m */; };
+		F4E76B921D5ADDEC006CE12F /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41421D4B34B300F505CA /* IJKMediaFramework.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,7 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4CE41431D4B34B300F505CA /* IJKMediaFramework.framework in Frameworks */,
+				F4E76B921D5ADDEC006CE12F /* IJKMediaFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

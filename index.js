@@ -72,9 +72,7 @@ export default class RCTIJKPlayer extends Component {
     }
 
     start(options) {
-        const props = convertNativeProps(this.props);
         console.log("ijkplayer index start begin");
-        // this.setState({ isRecording: true });
         return IJKPlayerManager.start(options);
     }
 
@@ -108,7 +106,10 @@ export default class RCTIJKPlayer extends Component {
         return IJKPlayerManager.playbackInfo()
             .then(data => {
                 for (var k in data) {
-                    data[k] = +data[k];
+                    if (data.hasOwnProperty(k)) {
+                        data[k] = +data[k];
+                    }
+
                 }
                 // console.log(data);
                 if (self.props.onPlayBackInfo) self.props.onPlayBackInfo(data);

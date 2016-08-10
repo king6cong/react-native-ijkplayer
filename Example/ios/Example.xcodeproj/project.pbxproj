@@ -31,7 +31,6 @@
 		B86137C3D81C493CBF8E0FE0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9564AE097CF49218C235BAB /* FontAwesome.ttf */; };
 		D104661CBD2348C486B856B8 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA3F247B09664BF1A7C16041 /* Entypo.ttf */; };
 		DDD5791AD0214D6AA30EE9F9 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1225797D73F94F5F8EECB0D0 /* Octicons.ttf */; };
-		F4CE41191D4B0A0700F505CA /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41181D4B0A0700F505CA /* IJKMediaFramework.framework */; };
 		F4CE41301D4B0A7200F505CA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41251D4B0A7200F505CA /* AudioToolbox.framework */; };
 		F4CE41311D4B0A7200F505CA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41261D4B0A7200F505CA /* AVFoundation.framework */; };
 		F4CE41321D4B0A7200F505CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41271D4B0A7200F505CA /* CoreGraphics.framework */; };
@@ -47,6 +46,7 @@
 		F4CE413E1D4B0A8600F505CA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE413D1D4B0A8600F505CA /* libz.tbd */; };
 		F4CE413F1D4B0B9F00F505CA /* libRCTIJKPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F41B74B11D478BF900CA03FF /* libRCTIJKPlayer.a */; };
 		F4CE41411D4B327000F505CA /* liblzma.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CE41401D4B327000F505CA /* liblzma.tbd */; };
+		F4E76B951D5B00C9006CE12F /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4E76B941D5B00C9006CE12F /* IJKMediaFramework.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,7 +176,6 @@
 		C9564AE097CF49218C235BAB /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		CA3F247B09664BF1A7C16041 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		F41B74AC1D478BF900CA03FF /* RCTIJKPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTIJKPlayer.xcodeproj; path = ../../ios/RCTIJKPlayer.xcodeproj; sourceTree = "<group>"; };
-		F4CE41181D4B0A0700F505CA /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
 		F4CE41251D4B0A7200F505CA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F4CE41261D4B0A7200F505CA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F4CE41271D4B0A7200F505CA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -191,6 +190,7 @@
 		F4CE413B1D4B0A7F00F505CA /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		F4CE413D1D4B0A8600F505CA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		F4CE41401D4B327000F505CA /* liblzma.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = liblzma.tbd; path = usr/lib/liblzma.tbd; sourceTree = SDKROOT; };
+		F4E76B941D5B00C9006CE12F /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IJKMediaFramework.framework; path = ../../ios/IJKMediaFramework.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4E76B951D5B00C9006CE12F /* IJKMediaFramework.framework in Frameworks */,
 				F4CE41411D4B327000F505CA /* liblzma.tbd in Frameworks */,
 				F4CE413F1D4B0B9F00F505CA /* libRCTIJKPlayer.a in Frameworks */,
 				F4CE413E1D4B0A8600F505CA /* libz.tbd in Frameworks */,
@@ -223,7 +224,6 @@
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
-				F4CE41191D4B0A0700F505CA /* IJKMediaFramework.framework in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
@@ -371,6 +371,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F4E76B941D5B00C9006CE12F /* IJKMediaFramework.framework */,
 				F4CE41401D4B327000F505CA /* liblzma.tbd */,
 				F4CE413D1D4B0A8600F505CA /* libz.tbd */,
 				F4CE413B1D4B0A7F00F505CA /* libbz2.tbd */,
@@ -385,7 +386,6 @@
 				F4CE412D1D4B0A7200F505CA /* QuartzCore.framework */,
 				F4CE412E1D4B0A7200F505CA /* UIKit.framework */,
 				F4CE412F1D4B0A7200F505CA /* VideoToolbox.framework */,
-				F4CE41181D4B0A0700F505CA /* IJKMediaFramework.framework */,
 				13B07FAE1A68108700A75B9A /* Example */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ExampleTests */,
@@ -783,6 +783,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"/Users/cong/repos/react-native-ijkplayer/ios/",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -812,6 +813,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"/Users/cong/repos/react-native-ijkplayer/ios/",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
