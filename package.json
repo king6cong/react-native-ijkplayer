@@ -5,7 +5,7 @@
     "url" : "https://github.com/king6cong/react-native-ijkplayer.git"
   },
   "version": "0.3.8",
-  "description": "IKJPlayer for React Native.",
+  "description": "IJKPlayer for React Native.",
   "author": "wangcong <king6cong@gmail.com>",
   "nativePackage": true,
   "license": "MIT",
