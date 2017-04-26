@@ -29,7 +29,7 @@ export default class RCTIJKPlayer extends Component {
     }
 
     static constants = {
-        PlayBackState: RCTIJKPlayer.PlayBackState,
+        PlayBackState: this.PlayBackState,
     };
 
     static propTypes = {

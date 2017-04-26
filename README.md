@@ -28,7 +28,7 @@ open Example.xcodeproj
 
 ### Android
 
-ijk dependencies is satisfied using gralde for Android
+ijk dependencies is satisfied using gradle for Android
 
 ```
 cd react-native-ijkplayer/Example/android
