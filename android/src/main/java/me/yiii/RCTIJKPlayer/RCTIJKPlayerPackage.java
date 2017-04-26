@@ -1,6 +1,5 @@
 package me.yiii.RCTIJKPlayer;
 
-import android.app.Activity;
 import android.util.Log;
 
 import com.facebook.react.ReactPackage;
@@ -13,10 +12,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class RCTIJKPlayerPackage implements ReactPackage {
-    private Activity activity = null;
     private static final String TAG = "RCTIJKPlayerPackage";
-    public RCTIJKPlayerPackage(Activity activity){
-        this.activity = activity;
+    public RCTIJKPlayerPackage(){
     }
 
     @Override
@@ -32,7 +29,7 @@ public class RCTIJKPlayerPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
         //noinspection ArraysAsListWithZeroOrOneArgument
-        return Collections.<ViewManager>singletonList(new RCTIJKPlayerViewManager(activity));
+        return Collections.<ViewManager>singletonList(new RCTIJKPlayerViewManager());
     }
 
 }
